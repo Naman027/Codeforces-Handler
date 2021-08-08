@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", async() => {
         {
             agla = data.result[i].name;
             seconds = -data.result[i].relativeTimeSeconds;
-            console.log(agla);
+            // console.log(agla);
         }
         else break;
     }   
