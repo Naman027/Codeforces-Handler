@@ -10,7 +10,6 @@ document.addEventListener("DOMContentLoaded", async() => {
     let data = await res.json();
     var agla = "arre yaar";
     var seconds=0;
-    console.log("hello");
     for(var i=0;i<data.result.length;++i){
         if(data.result[i].relativeTimeSeconds<0){
             agla = data.result[i].name;
@@ -57,7 +56,7 @@ document.addEventListener("DOMContentLoaded", async() => {
 });
 
 document.addEventListener("DOMContentLoaded", async() => {
-    let api = await fetch("https://codeforces.com/api/user.status?handle=HighVoltage&from=1&count=50");
+    let api = await fetch("https://codeforces.com/api/user.status?handle=NamanGoyal07&from=1&count=50");
     let data = await api.json();
     // data.status returns the status of the request
     let desciption_prob = data.result;
@@ -80,6 +79,8 @@ document.addEventListener("DOMContentLoaded", async() => {
         }
         i++;
     }
+
+    console.log(probsNotDone.size);
     let link;
     for (const [key, value] of probsNotDone.entries()) {
         if(value>=100000){
