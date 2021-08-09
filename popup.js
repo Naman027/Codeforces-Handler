@@ -12,8 +12,7 @@ document.addEventListener("DOMContentLoaded", async() => {
     var seconds=0;
     console.log("hello");
     for(var i=0;i<data.result.length;++i){
-        if(data.result[i].relativeTimeSeconds<0)
-        {
+        if(data.result[i].relativeTimeSeconds<0){
             agla = data.result[i].name;
             seconds = -data.result[i].relativeTimeSeconds;
             // console.log(agla);
@@ -34,8 +33,7 @@ document.addEventListener("DOMContentLoaded", async() => {
     var all_subs=data.result;
     var cnt=0, i=0;
     var cur_date=new Date();
-    while (i < 50)
-    {
+    while (i < 50){
         var sub_date = new Date(all_subs[i].creationTimeSeconds*1000);
         if(cur_date.getDate()!=sub_date.getDate())
         break;
@@ -57,3 +55,34 @@ document.addEventListener("DOMContentLoaded", async() => {
     else  
     num_ac.innerHTML="Congrats! You have completed the target of "+target+" questions today.";
 });
+
+document.addEventListener("DOMContentLoaded", async() => {
+    let api = await fetch("https://codeforces.com/api/user.status?handle=HighVoltage&from=1&count=50");
+    let data = await api.json();
+    // data.status returns the status of the request
+    let desciption_prob = data.result;
+    const acceptedProbs = new Set();
+    let i = 0;
+    let cnt = 5;
+    let probsNotDone = new Set();
+    while(i<100 && cnt>0){
+        let contestId = desciption_prob[i].problem.contestId;
+        let indexProblem = desciption_prob[i].problem.index;
+        let idOfProblem = contestId+"/problem/"+indexProblem;
+        if(desciption_prob[i].verdict=="OK"){    
+            acceptedProbs.add(idOfProblem);
+        }
+        else{
+            if(!acceptedProbs.has(idOfProblem) && !probsNotDone.has(idOfProblem)){
+                probsNotDone.add(idOfProblem);
+                cnt--;
+            }
+        }
+    }
+
+    probsNotDone.forEach((link)=>{
+        link = "https://codeforces.com/contest/"+link;
+        document.write("<a href='" + link + "'>" + "Probs" + "</a>")
+    });
+});
+
