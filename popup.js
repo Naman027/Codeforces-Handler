@@ -65,7 +65,7 @@ document.addEventListener("DOMContentLoaded", async() => {
     let i = 0;
     let cnt = 5;
     let probsNotDone = new Set();
-    while(i<100 && cnt>0){
+    while(i<50 && cnt>0){
         let contestId = desciption_prob[i].problem.contestId;
         let indexProblem = desciption_prob[i].problem.index;
         let idOfProblem = contestId+"/problem/"+indexProblem;
@@ -83,7 +83,12 @@ document.addEventListener("DOMContentLoaded", async() => {
 
     probsNotDone.forEach((link)=>{
         link = "https://codeforces.com/contest/"+link;
-        document.write("<a href='" + link + "'>" + "Probs" + "</a>")
+        var anchor_tag = document.createElement("a");
+        anchor_tag.href=link;
+        anchor_tag.target="blank";
+        anchor_tag.innerHTML="Prob ";
+        let prob_links = document.getElementById("WA_probs");
+        prob_links.appendChild(anchor_tag);
     });
 });
 
