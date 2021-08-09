@@ -78,6 +78,7 @@ document.addEventListener("DOMContentLoaded", async() => {
                 cnt--;
             }
         }
+        i++;
     }
 
     probsNotDone.forEach((link)=>{
