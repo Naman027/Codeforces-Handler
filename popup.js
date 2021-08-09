@@ -56,7 +56,7 @@ document.addEventListener("DOMContentLoaded", async() => {
 });
 
 document.addEventListener("DOMContentLoaded", async() => {
-    let api = await fetch("https://codeforces.com/api/user.status?handle=NamanGoyal07&from=1&count=50");
+    let api = await fetch("https://codeforces.com/api/user.status?handle=HighVoltage&from=1&count=50");
     let data = await api.json();
     // data.status returns the status of the request
     let desciption_prob = data.result;
