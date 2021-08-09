@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", async() => {
 });
 
 document.addEventListener("DOMContentLoaded", async() => {
-    let api = await fetch("https://codeforces.com/api/user.status?handle=HighVoltage&from=1&count=50");
+    let api = await fetch("https://codeforces.com/api/user.status?handle=HighVoltage&from=1&count=100");
     let data = await api.json();
     // data.status returns the status of the request
     let desciption_prob = data.result;
@@ -65,7 +65,7 @@ document.addEventListener("DOMContentLoaded", async() => {
     let i = 0;
     let cnt = 5;
     let probsNotDone = new Set();
-    while(i<50 && cnt>0){
+    while(i<100 && cnt>0){
         let contestId = desciption_prob[i].problem.contestId;
         let indexProblem = desciption_prob[i].problem.index;
         let idOfProblem = contestId+"/problem/"+indexProblem;
@@ -82,9 +82,9 @@ document.addEventListener("DOMContentLoaded", async() => {
     }
 
     probsNotDone.forEach((link)=>{
-        link = "https://codeforces.com/contest/"+link;
+        let url = "https://codeforces.com/contest/"+link;
         var anchor_tag = document.createElement("a");
-        anchor_tag.href=link;
+        anchor_tag.href=url;
         anchor_tag.target="blank";
         anchor_tag.innerHTML="Prob ";
         let prob_links = document.getElementById("WA_probs");
