@@ -10,7 +10,6 @@ document.addEventListener("DOMContentLoaded", async() => {
     let data = await res.json();
     var agla = "arre yaar";
     var seconds=0;
-    console.log("hello");
     for(var i=0;i<data.result.length;++i){
         if(data.result[i].relativeTimeSeconds<0){
             agla = data.result[i].name;
@@ -57,38 +56,46 @@ document.addEventListener("DOMContentLoaded", async() => {
 });
 
 document.addEventListener("DOMContentLoaded", async() => {
-    let api = await fetch("https://codeforces.com/api/user.status?handle=HighVoltage&from=1&count=100");
+    let api = await fetch("https://codeforces.com/api/user.status?handle=HighVoltage&from=1&count=50");
     let data = await api.json();
     // data.status returns the status of the request
     let desciption_prob = data.result;
     const acceptedProbs = new Set();
     let i = 0;
     let cnt = 5;
-    let probsNotDone = new Set();
-    while(i<100 && cnt>0){
+    let probsNotDone = new Map();
+    while(i<50 && cnt>0){
         let contestId = desciption_prob[i].problem.contestId;
         let indexProblem = desciption_prob[i].problem.index;
         let idOfProblem = contestId+"/problem/"+indexProblem;
+        let problemName = desciption_prob[i].problem.name;
         if(desciption_prob[i].verdict=="OK"){    
             acceptedProbs.add(idOfProblem);
         }
         else{
-            if(!acceptedProbs.has(idOfProblem) && !probsNotDone.has(idOfProblem)){
-                probsNotDone.add(idOfProblem);
+            if(!acceptedProbs.has(idOfProblem) && probsNotDone.get(idOfProblem)==undefined){
+                probsNotDone.set(idOfProblem,{id: contestId,name: problemName});
                 cnt--;
             }
         }
         i++;
     }
 
-    probsNotDone.forEach((link)=>{
-        let url = "https://codeforces.com/contest/"+link;
+    console.log(probsNotDone.size);
+    let link;
+    for (const [key, value] of probsNotDone.entries()) {
+        if(value>=100000){
+            link = "https://codeforces.com/gym/"+key;
+        }    
+        else{
+            link = "https://codeforces.com/contest/"+key;
+        }
         var anchor_tag = document.createElement("a");
         anchor_tag.href=url;
         anchor_tag.target="blank";
-        anchor_tag.innerHTML="Prob ";
+        anchor_tag.innerHTML=value.name;
         let prob_links = document.getElementById("WA_probs");
         prob_links.appendChild(anchor_tag);
-    });
+    };
 });
 
