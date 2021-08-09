@@ -68,12 +68,13 @@ document.addEventListener("DOMContentLoaded", async() => {
         let contestId = desciption_prob[i].problem.contestId;
         let indexProblem = desciption_prob[i].problem.index;
         let idOfProblem = contestId+"/problem/"+indexProblem;
+        let problemName = desciption_prob[i].problem.name;
         if(desciption_prob[i].verdict=="OK"){    
             acceptedProbs.add(idOfProblem);
         }
         else{
             if(!acceptedProbs.has(idOfProblem) && probsNotDone.get(idOfProblem)==undefined){
-                probsNotDone.set(idOfProblem,contestId);
+                probsNotDone.set(idOfProblem,{id: contestId,name: problemName});
                 cnt--;
             }
         }
@@ -92,7 +93,7 @@ document.addEventListener("DOMContentLoaded", async() => {
         var anchor_tag = document.createElement("a");
         anchor_tag.href=link;
         anchor_tag.target="blank";
-        anchor_tag.innerHTML="Prob ";
+        anchor_tag.innerHTML=value.name;
         let prob_links = document.getElementById("WA_probs");
         prob_links.appendChild(anchor_tag);
     };
