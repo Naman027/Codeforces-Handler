@@ -90,12 +90,12 @@ document.addEventListener("DOMContentLoaded", async() => {
         else{
             link = "https://codeforces.com/contest/"+key;
         }
-        var anchor_tag = document.createElement("a");
-        anchor_tag.href=url;
-        anchor_tag.target="blank";
-        anchor_tag.innerHTML=value.name;
+        var linkToProb = document.createElement("a");
+        linkToProb.href=link;
+        linkToProb.target="blank";
+        linkToProb.innerHTML=value.name;
         let prob_links = document.getElementById("WA_probs");
-        prob_links.appendChild(anchor_tag);
+        prob_links.appendChild(linkToProb);
     };
 });
 
