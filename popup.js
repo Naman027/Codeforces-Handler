@@ -80,7 +80,7 @@ document.addEventListener("DOMContentLoaded", async() => {
         }
         i++;
     }
-
+    
     probsNotDone.forEach((link)=>{
         link = "https://codeforces.com/contest/"+link;
         document.write("<a href='" + link + "'>" + "Probs" + "</a>")
