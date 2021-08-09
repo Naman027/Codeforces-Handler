@@ -64,7 +64,7 @@ document.addEventListener("DOMContentLoaded", async() => {
     const acceptedProbs = new Set();
     let i = 0;
     let cnt = 5;
-    let probsNotDone = new Set();
+    let probsNotDone = new Map();
     while(i<50 && cnt>0){
         let contestId = desciption_prob[i].problem.contestId;
         let indexProblem = desciption_prob[i].problem.index;
@@ -73,22 +73,27 @@ document.addEventListener("DOMContentLoaded", async() => {
             acceptedProbs.add(idOfProblem);
         }
         else{
-            if(!acceptedProbs.has(idOfProblem) && !probsNotDone.has(idOfProblem)){
-                probsNotDone.add(idOfProblem);
+            if(!acceptedProbs.has(idOfProblem) && probsNotDone.get(idOfProblem)==undefined){
+                probsNotDone.set(idOfProblem,contestId);
                 cnt--;
             }
         }
         i++;
     }
-    
-    probsNotDone.forEach((link)=>{
-        link = "https://codeforces.com/contest/"+link;
+    let link;
+    for (const [key, value] of probsNotDone.entries()) {
+        if(value>=100000){
+            link = "https://codeforces.com/gym/"+key;
+        }    
+        else{
+            link = "https://codeforces.com/contest/"+key;
+        }
         var anchor_tag = document.createElement("a");
         anchor_tag.href=link;
         anchor_tag.target="blank";
         anchor_tag.innerHTML="Prob ";
         let prob_links = document.getElementById("WA_probs");
         prob_links.appendChild(anchor_tag);
-    });
+    };
 });
 
