@@ -14,16 +14,14 @@ document.addEventListener("DOMContentLoaded", async () => {
         if (data.result[i].relativeTimeSeconds < 0) {
             agla = data.result[i].name;
             seconds = -data.result[i].relativeTimeSeconds;
-            // console.log(agla);
         }
         else break;
     }
     page.innerHTML = agla;
-    var mins = parseInt(seconds / 60);
-    var hrs = parseInt(mins / 60);
-    var days = parseInt(hrs / 24);
-    time_left.innerHTML = days + " days, " + (hrs % 24) + " hours and " + (mins % 60) + " minutes left";
-
+    var mins = parseInt(seconds/60);
+    var hrs = parseInt(mins/60);
+    var days = parseInt(hrs/24);
+    time_left.innerHTML = days+" days, "+(hrs%24)+" hours and "+(mins%60)+" minutes left";
 });
 
 document.addEventListener("DOMContentLoaded", async () => {
@@ -45,14 +43,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     var percentage = (cnt * 100) / target;
     label_for_bar.innerText = "Today's Target Completion: " + percentage + "%";
     bar.value = percentage;
-    if (cnt == 0)
-        num_ac.innerHTML = "You have done no questions yet... " + (target - cnt) + " to be done today!";
-    else if (cnt == 1)
-        num_ac.innerHTML = "You have done only one question... " + (target - cnt) + " more to go!";
-    else if (cnt < target)
-        num_ac.innerHTML = "You have done " + cnt + " questions... " + (target - cnt) + " more to go!";
-    else
-        num_ac.innerHTML = "Congrats! You have completed the target of " + target + " questions today.";
+    if(cnt==0) num_ac.innerHTML="You have done no questions yet... "+(target-cnt)+" to be done today!";
+    else if(cnt==1) num_ac.innerHTML="You have done only one question... "+(target-cnt)+" more to go!";
+    else if(cnt<target) num_ac.innerHTML="You have done "+cnt+" questions... "+(target-cnt)+" more to go!";
+    else num_ac.innerHTML="Congrats! You have completed the target of "+target+" questions today.";
 });
 
 document.addEventListener("DOMContentLoaded", async () => {
@@ -84,12 +78,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     console.log(probsNotDone.size);
     let link;
     for (const [key, value] of probsNotDone.entries()) {
-        if (value >= 100000) {
-            link = "https://codeforces.com/gym/" + key;
-        }
-        else {
-            link = "https://codeforces.com/contest/" + key;
-        }
+        if(value>=100000) link = "https://codeforces.com/gym/"+key;
+        else link = "https://codeforces.com/contest/"+key;
         var linkToProb = document.createElement("a");
         linkToProb.href = link;
         linkToProb.target = "blank";
