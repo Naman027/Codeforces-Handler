@@ -1,14 +1,16 @@
 {
-"name":"CF Handler",
-"description":"Build an extension",
-"version":"1.0",
-"manifest_version":3,
-"background":{
-    "service_worker":"background.js"
-},
-"action":{
-    "default_popup":"popup.html"
-},
-"permissions": ["storage"]
+  "name": "CF Handler",
+  "description": "Build an extension",
+  "version": "1.0",
+  "manifest_version": 3,
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "storage"
+  ]
 }
 
