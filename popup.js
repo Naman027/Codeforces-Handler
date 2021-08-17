@@ -6,8 +6,10 @@ let bar = document.getElementById("bar");
 let target=5;
 let prob_links = document.getElementById("WA_probs");
 let recommended_probs = document.getElementById("Recommended_Probs");
+let button = document.getElementById("diff_selected");
+let select = document.getElementById("diff");
 
-document.addEventListener("DOMContentLoaded", async() => {
+button.addEventListener("click", async() => {
     let url = "https://cors-anywhere.herokuapp.com/https://recommender.codedrills.io/profile?handles=NamanGoyal07";
     let xhr = new XMLHttpRequest();
     xhr.open("GET",url,true);
@@ -18,7 +20,7 @@ document.addEventListener("DOMContentLoaded", async() => {
     xhr.onload = function() {
         if(xhr.readyState==4 && xhr.status==200){
             // do something with that HTML page
-            let response = xhr.responseXML.getElementById("Easy").children[2].children[0].children[0].children[0].children;
+            let response = xhr.responseXML.getElementById(select.value).children[2].children[0].children[0].children[0].children;
             for(let i=0;i<response.length && tar;i++){
                 let curchild = response[i].children[0].children[0].children[0];
                 let link = curchild.getAttribute("href");
@@ -27,6 +29,7 @@ document.addEventListener("DOMContentLoaded", async() => {
                 tar--;
             }
             //console.log(probsNotDone.size);
+            recommended_probs.innerHTML="";
             for (const [key, value] of probsNotDone.entries()) {
                 var linkToProb = document.createElement("a");
                 linkToProb.href=value;
