@@ -3,7 +3,45 @@ let time_left = document.getElementById("time_left");
 let num_ac = document.getElementById("num_solved");
 let label_for_bar = document.getElementById("label");
 let bar = document.getElementById("bar");
-var target=5;
+let target=5;
+let prob_links = document.getElementById("WA_probs");
+let recommended_probs = document.getElementById("Recommended_Probs");
+
+document.addEventListener("DOMContentLoaded", async() => {
+    let url = "https://cors-anywhere.herokuapp.com/https://recommender.codedrills.io/profile?handles=NamanGoyal07";
+    let xhr = new XMLHttpRequest();
+    xhr.open("GET",url,true);
+    xhr.responseType = "document";
+
+    let tar = target;
+    let probsNotDone = new Map();
+    xhr.onload = function() {
+        if(xhr.readyState==4 && xhr.status==200){
+            // do something with that HTML page
+            let response = xhr.responseXML.getElementById("Easy").children[2].children[0].children[0].children[0].children;
+            for(let i=0;i<response.length && tar;i++){
+                let curchild = response[i].children[0].children[0].children[0];
+                let link = curchild.getAttribute("href");
+                //console.log(link);
+                probsNotDone.set(curchild.text,link);
+                tar--;
+            }
+            //console.log(probsNotDone.size);
+            for (const [key, value] of probsNotDone.entries()) {
+                var linkToProb = document.createElement("a");
+                linkToProb.href=value;
+                linkToProb.target="blank";
+                linkToProb.innerHTML=key+"<br/>";
+                recommended_probs.appendChild(linkToProb);
+            };
+        }
+    };
+    
+    xhr.onerror = function(){
+        console.error(xhr.status,xhr.statusText);
+    }
+    xhr.send();
+});
 
 document.addEventListener("DOMContentLoaded", async() => {
     let res = await fetch("https://codeforces.com/api/contest.list?gym=false");
@@ -75,7 +113,7 @@ document.addEventListener("DOMContentLoaded", async() => {
         i++;
     }
 
-    console.log(probsNotDone.size);
+    //console.log(probsNotDone.size);
     let link;
     for (const [key, value] of probsNotDone.entries()) {
         if(value>=100000) link = "https://codeforces.com/gym/"+key;
@@ -83,8 +121,7 @@ document.addEventListener("DOMContentLoaded", async() => {
         var linkToProb = document.createElement("a");
         linkToProb.href=link;
         linkToProb.target="blank";
-        linkToProb.innerHTML=value.name;
-        let prob_links = document.getElementById("WA_probs");
+        linkToProb.innerHTML=value.name+"<br/>";
         prob_links.appendChild(linkToProb);
     };
 });
