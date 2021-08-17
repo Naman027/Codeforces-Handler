@@ -1,5 +1,5 @@
--> last 5 unsolved problems -- Done
--> last 5 favourite questions
--> styling
+1. Frontend 
+2. Solving CORS Errors
+
 
 
