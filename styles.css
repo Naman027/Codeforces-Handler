@@ -1,0 +1,29 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap");
+
+.dark-mode {
+  background: #333;
+  color: #fff !important;
+}
+
+.dark-control {
+  text-align: right;
+  color: #666;
+  text-decoration: underline;
+  font-size: 10px;
+  cursor: pointer;
+  padding: 18px 0px 0px 0px;
+  margin-left: auto;
+}
+
+.dark-mode .dark-control {
+  color: #fafafa;
+}
+
+.footer-controls {
+  display: flex;
+  justify-content: space-between;
+}
+
+.dark-mode {
+  color: #fafafa;
+}
