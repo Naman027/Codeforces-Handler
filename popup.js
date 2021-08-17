@@ -9,6 +9,7 @@ let prob_links = document.getElementById("WA_probs");
 let recommended_probs = document.getElementById("Recommended_Probs");
 let button = document.getElementById("diff_selected");
 let select = document.getElementById("diff");
+let recentContestLink = document.getElementById("recentContestLink");
 
 chrome.storage.sync.get(
     ["darkMode"],
@@ -50,7 +51,7 @@ button.addEventListener("click", async() => {
             //console.log(probsNotDone.size);
             recommended_probs.innerHTML="";
             for (const [key, value] of probsNotDone.entries()) {
-                var linkToProb = document.createElement("a");
+                let linkToProb = document.createElement("a");
                 linkToProb.href = value;
                 linkToProb.target = "blank";
                 linkToProb.innerHTML = key + "<br/>";
@@ -58,7 +59,6 @@ button.addEventListener("click", async() => {
             };
         }
     };
-
     xhr.onerror = function () {
         console.error(xhr.status, xhr.statusText);
     }
@@ -68,30 +68,40 @@ button.addEventListener("click", async() => {
 document.addEventListener("DOMContentLoaded", async () => {
     let res = await fetch("https://codeforces.com/api/contest.list?gym=false");
     let data = await res.json();
-    var agla = "arre yaar";
-    var seconds = 0;
-    for (var i = 0; i < data.result.length; ++i) {
+    let agla = "arre yaar";
+    let seconds = 0;
+    let contestId = -1;
+    for (let i = 0; i < data.result.length; ++i) {
         if (data.result[i].relativeTimeSeconds < 0) {
             agla = data.result[i].name;
             seconds = -data.result[i].relativeTimeSeconds;
+            contestId = data.result[i].id;
         }
         else break;
     }
+    
+    let link = "https://codeforces.com/contests/"+contestId;
+    let linkToProb = document.createElement("a");
+    linkToProb.href = link;
+    linkToProb.target = "blank";
+    linkToProb.innerHTML = agla + "<br/>";
+    recentContestLink.appendChild(linkToProb);
     page.innerHTML = agla;
-    var mins = parseInt(seconds / 60);
-    var hrs = parseInt(mins / 60);
-    var days = parseInt(hrs / 24);
-    time_left.innerHTML = days + " days, " + (hrs % 24) + " hours and " + (mins % 60) + " minutes left";
+    let mins = parseInt(seconds / 60);
+    let hrs = parseInt(mins / 60);
+    let days = parseInt(hrs / 24);
+    hrs = hrs + 24*days;
+    time_left.innerHTML ="<h5>" + (hrs) + " hours and " + (mins % 60) + " minutes left"+"<h5/>";
 });
 
 document.addEventListener("DOMContentLoaded", async () => {
     let res = await fetch("https://codeforces.com/api/user.status?handle=HighVoltage&from=1&count=50");
     let data = await res.json();
-    var all_subs = data.result;
-    var cnt = 0, i = 0;
-    var cur_date = new Date();
+    let all_subs = data.result;
+    let cnt = 0, i = 0;
+    let cur_date = new Date();
     while (i < 50) {
-        var sub_date = new Date(all_subs[i].creationTimeSeconds * 1000);
+        let sub_date = new Date(all_subs[i].creationTimeSeconds * 1000);
         if (cur_date.getDate() != sub_date.getDate())
             break;
         if (all_subs[i].verdict == "OK")
@@ -100,7 +110,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
     if (cnt > target)
         cnt = target;
-    var percentage = (cnt * 100) / target;
+    let percentage = (cnt * 100) / target;
     label_for_bar.innerText = "Today's Target Completion: " + percentage + "%";
     bar.value = percentage;
     if (cnt == 0) num_ac.innerHTML = "You have done no questions yet... " + (target - cnt) + " to be done today!";
@@ -136,11 +146,12 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     //console.log(probsNotDone.size);
+    
     let link;
     for (const [key, value] of probsNotDone.entries()) {
         if (value >= 100000) link = "https://codeforces.com/gym/" + key;
         else link = "https://codeforces.com/contest/" + key;
-        var linkToProb = document.createElement("a");
+        let linkToProb = document.createElement("a");
         linkToProb.href = link;
         linkToProb.target = "blank";
         linkToProb.innerHTML = value.name + "<br/>";
