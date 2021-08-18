@@ -10,10 +10,14 @@
 </head>
 
 <body class="container">
+    <div class="color1">
+        <h1>Codeforces Handler</h1>
+    </div>
     <div class="color2">
         <label for="handle_options">Codeforces handle:</label>
-        <input type="text" id="handle_options" name="handles">
+        <input type="text" id="handle_options" name="handles" placeholder="Eg.- HighVoltage">
         <input type="submit" id="handle_selected" value="Submit">
+        <br><br><p id="show_handle"></p>
     </div>
     <div class="color1">
         <h3> Upcoming Codeforces Contest </h3>
@@ -21,7 +25,7 @@
         <h3 id="time_left"></h3>
     </div>
     <div class="color2">
-        <h3><label id="label" for="bar"></label></h3>
+        <b><label id="label" for="bar"></label></b><br>
         <progress id="bar" max="100"></progress>
         <h3 id="num_solved"></h3>
     </div>
@@ -29,7 +33,7 @@
     <script src="jquery-3.6.0.min.js"></script>
     <!-- <input type="button" id='recommendations' name="scriptbutton" value=" Run Script "> -->
     <div class="color1">
-        <h3>The last Wrong Verdict Submissions:</h3>
+        <h3>Last few Wrong Verdict Submissions:</h3>
         <div id="WA_probs"></div>
     </div>
     <div class="color2">

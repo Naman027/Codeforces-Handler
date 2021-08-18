@@ -1,4 +1,3 @@
-let page = document.getElementById("game_changer");
 let time_left = document.getElementById("time_left");
 let num_ac = document.getElementById("num_solved");
 let label_for_bar = document.getElementById("label");
@@ -11,8 +10,10 @@ let button = document.getElementById("diff_selected");
 let diff = document.getElementById("diff");
 let recentContestLink = document.getElementById("recentContestLink");
 let handle_selected = document.getElementById("handle_selected");
-let handle_options = document.getElementById("handle_options")
+let handle_options = document.getElementById("handle_options");
+let show_handle = document.getElementById("show_handle");
 let handle="HighVoltage";
+show_handle.innerHTML = "Handle selected: <b>" + handle + "</b>";
 
 chrome.storage.sync.get(
     ["darkMode"],
@@ -33,6 +34,7 @@ chrome.storage.sync.get(
 
 handle_selected.addEventListener("click", () => {
     handle = handle_options.value;
+    show_handle.innerHTML = "Handle selected: <b>" + handle + "</b>";
 });
 
 button.addEventListener("click", async() => {
@@ -75,9 +77,9 @@ button.addEventListener("click", async() => {
 document.addEventListener("DOMContentLoaded", async () => {
     let res = await fetch("https://codeforces.com/api/contest.list?gym=false");
     let data = await res.json();
-    let agla = "arre yaar";
     let seconds = 0;
     let contestId = -1;
+    let agla="next contest"
     for (let i = 0; i < data.result.length; ++i) {
         if (data.result[i].relativeTimeSeconds < 0) {
             agla = data.result[i].name;
@@ -86,19 +88,17 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
         else break;
     }
-    
     let link = "https://codeforces.com/contests/"+contestId;
     let linkToProb = document.createElement("a");
     linkToProb.href = link;
     linkToProb.target = "blank";
     linkToProb.innerHTML = agla + "<br/>";
     recentContestLink.appendChild(linkToProb);
-    page.innerHTML = agla;
     let mins = parseInt(seconds / 60);
     let hrs = parseInt(mins / 60);
     let days = parseInt(hrs / 24);
-    hrs = hrs + 24*days;
-    time_left.innerHTML ="<h5>" + (hrs) + " hours and " + (mins % 60) + " minutes left"+"<h5/>";
+    // hrs = hrs + 24*days;
+    time_left.innerHTML ="<p>" + (days) + " days, " + (hrs) + " hours, " + (mins % 60) + " minutes left"+"</p>";
 });
 
 async function getTarget(){
