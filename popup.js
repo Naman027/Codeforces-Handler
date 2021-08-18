@@ -17,6 +17,7 @@ let show_handle = document.getElementById("show_handle");
 let handle="NamanGoyal07";
 show_handle.innerHTML = "Handle selected: <b>" + handle + "</b>";
 
+// Remove this if CORS error not solved
 document.addEventListener("DOMContentLoaded",function() {
     var cors_api_host = 'cors-anywhere.herokuapp.com';
     var cors_api_url = 'https://' + cors_api_host + '/';
@@ -33,6 +34,7 @@ document.addEventListener("DOMContentLoaded",function() {
         return open.apply(this, args);
     };
 });
+// upto this part
 
 chrome.storage.sync.get(
     ["darkMode"],
