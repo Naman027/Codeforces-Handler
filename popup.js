@@ -124,7 +124,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     let hrs = parseInt(mins / 60);
     let days = parseInt(hrs / 24);
     // hrs = hrs + 24*days;
-    time_left.innerHTML ="<p>" + (days) + " days, " + (hrs) + " hours, " + (mins % 60) + " minutes left"+"</p>";
+    if(days!=0) time_left.innerHTML ="<p>" + (days) + " days, " + (hrs) + " hours, " + (mins % 60) + " minutes left"+"</p>";
+    else time_left.innerHTML ="<p>" + (hrs) + " hours, " + (mins % 60) + " minutes left"+"</p>";
 });
 
 async function getTarget(){
