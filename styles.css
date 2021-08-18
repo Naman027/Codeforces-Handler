@@ -27,3 +27,17 @@
 .dark-mode {
   color: #fafafa;
 }
+
+/* body {
+  background-color: lightgray;
+} */
+
+.color2 {
+  margin-left: 0%;
+  margin-right: 0%;
+  background-color: lightblue;
+}
+
+.color1 {
+  background-color: lightgray;
+}

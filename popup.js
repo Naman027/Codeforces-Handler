@@ -10,6 +10,7 @@ let recommended_probs = document.getElementById("Recommended_Probs");
 let button = document.getElementById("diff_selected");
 let select = document.getElementById("diff");
 let recentContestLink = document.getElementById("recentContestLink");
+const handle="NamanGoyal07";
 
 chrome.storage.sync.get(
     ["darkMode"],
@@ -29,7 +30,7 @@ chrome.storage.sync.get(
 );
 
 button.addEventListener("click", async() => {
-    let url = "https://cors-anywhere.herokuapp.com/https://recommender.codedrills.io/profile?handles=NamanGoyal07";
+    let url = "https://cors-anywhere.herokuapp.com/https://recommender.codedrills.io/profile?handles="+handle;
     let xhr = new XMLHttpRequest();
     xhr.open("GET", url, true);
     xhr.responseType = "document";
@@ -95,7 +96,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 });
 
 document.addEventListener("DOMContentLoaded", async () => {
-    let res = await fetch("https://codeforces.com/api/user.status?handle=HighVoltage&from=1&count=50");
+    let res = await fetch("https://codeforces.com/api/user.status?handle="+handle+"&from=1&count=50");
     let data = await res.json();
     let all_subs = data.result;
     let cnt = 0, i = 0;
@@ -120,7 +121,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 });
 
 document.addEventListener("DOMContentLoaded", async () => {
-    let api = await fetch("https://codeforces.com/api/user.status?handle=HighVoltage&from=1&count=50");
+    let api = await fetch("https://codeforces.com/api/user.status?handle="+handle+"&from=1&count=50");
     let data = await api.json();
     // data.status returns the status of the request
     let desciption_prob = data.result;
