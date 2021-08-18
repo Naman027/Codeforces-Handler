@@ -8,9 +8,11 @@ const body = document.querySelector(".container");
 let prob_links = document.getElementById("WA_probs");
 let recommended_probs = document.getElementById("Recommended_Probs");
 let button = document.getElementById("diff_selected");
-let select = document.getElementById("diff");
+let diff = document.getElementById("diff");
 let recentContestLink = document.getElementById("recentContestLink");
-const handle="NamanGoyal07";
+let handle_selected = document.getElementById("handle_selected");
+let handle_options = document.getElementById("handle_options")
+let handle="HighVoltage";
 
 chrome.storage.sync.get(
     ["darkMode"],
@@ -29,6 +31,10 @@ chrome.storage.sync.get(
     }
 );
 
+handle_selected.addEventListener("click", () => {
+    handle = handle_options.value;
+});
+
 button.addEventListener("click", async() => {
     let url = "https://cors-anywhere.herokuapp.com/https://recommender.codedrills.io/profile?handles="+handle;
     let xhr = new XMLHttpRequest();
@@ -41,7 +47,7 @@ button.addEventListener("click", async() => {
         if (xhr.readyState == 4 && xhr.status == 200) {
             // do something with that HTML page
 
-            let response = xhr.responseXML.getElementById(select.value).children[2].children[0].children[0].children[0].children;
+            let response = xhr.responseXML.getElementById(diff.value).children[2].children[0].children[0].children[0].children;
             for(let i=0;i<response.length && tar;i++){
                 let curchild = response[i].children[0].children[0].children[0];
                 let link = curchild.getAttribute("href");
@@ -95,14 +101,14 @@ document.addEventListener("DOMContentLoaded", async () => {
     time_left.innerHTML ="<h5>" + (hrs) + " hours and " + (mins % 60) + " minutes left"+"<h5/>";
 });
 
-document.addEventListener("DOMContentLoaded", async () => {
-    let res = await fetch("https://codeforces.com/api/user.status?handle="+handle+"&from=1&count=50");
+async function getTarget(){
+    let res = await fetch("https://codeforces.com/api/user.status?handle=" + handle + "&from=1&count=50");
     let data = await res.json();
     let all_subs = data.result;
     let cnt = 0, i = 0;
     let cur_date = new Date();
     while (i < 50) {
-        let sub_date = new Date(all_subs[i].creationTimeSeconds * 1000);
+        let sub_date = new Date(all_subs[i].creationTimeSeconds*1000);
         if (cur_date.getDate() != sub_date.getDate())
             break;
         if (all_subs[i].verdict == "OK")
@@ -118,10 +124,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     else if (cnt == 1) num_ac.innerHTML = "You have done only one question... " + (target - cnt) + " more to go!";
     else if (cnt < target) num_ac.innerHTML = "You have done " + cnt + " questions... " + (target - cnt) + " more to go!";
     else num_ac.innerHTML = "Congrats! You have completed the target of " + target + " questions today.";
-});
+}
 
-document.addEventListener("DOMContentLoaded", async () => {
-    let api = await fetch("https://codeforces.com/api/user.status?handle="+handle+"&from=1&count=50");
+async function getWAprobs(){
+    let api = await fetch("https://codeforces.com/api/user.status?handle=" + handle + "&from=1&count=50");
     let data = await api.json();
     // data.status returns the status of the request
     let desciption_prob = data.result;
@@ -147,8 +153,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     //console.log(probsNotDone.size);
-    
+
     let link;
+    prob_links.innerHTML = "";
     for (const [key, value] of probsNotDone.entries()) {
         if (value >= 100000) link = "https://codeforces.com/gym/" + key;
         else link = "https://codeforces.com/contest/" + key;
@@ -158,7 +165,15 @@ document.addEventListener("DOMContentLoaded", async () => {
         linkToProb.innerHTML = value.name + "<br/>";
         prob_links.appendChild(linkToProb);
     };
-});
+}
+
+document.addEventListener("DOMContentLoaded", getTarget);
+
+document.addEventListener("DOMContentLoaded", getWAprobs);
+
+handle_selected.addEventListener("click", getTarget);
+
+handle_selected.addEventListener("click", getWAprobs);
 
 
 

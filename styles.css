@@ -53,4 +53,21 @@ body {
   padding-right: 3%;
   padding-top: 3%;
   padding-bottom: 3%;
+  background-color: whitesmoke;
+}
+
+a:link {
+  color: blue;
+}
+
+a:visited {
+  color: purple;
+}
+
+a:hover {
+  color: hotpink;
+}
+
+a:active {
+  color: red;
 }

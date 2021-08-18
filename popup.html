@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" style="min-width:300px;">
+<html lang="en" style="min-width:400px;">
 
 <head>
     <meta charset="UTF-8">
@@ -10,6 +10,15 @@
 </head>
 
 <body class="container">
+    <div class="color2">
+        <label for="diff">Choose your Codeforces handle:</label>
+        <select id="handle_options" name="handles">
+            <option value="HighVoltage">HighVoltage</option>
+            <option value="NamanGoyal07">NamanGoyal07</option>
+            <option value="tourist">tourist</option>
+        </select>
+        <input type="submit" id="handle_selected" value="Submit">
+    </div>
     <div class="color1">
         <h3> Upcoming Codeforces Contest </h3>
         <div id="recentContestLink"></div>
@@ -30,7 +39,7 @@
     <div class="color2">
         <h3>Recommended Problems</h3>
         <label for="diff">Choose the difficulty:</label>
-        <select id="diff" name="cars">
+        <select id="diff" name="levels">
             <option value="Easy">Easy</option>
             <option value="Medium">Medium</option>
             <option value="Hard">Hard</option>
