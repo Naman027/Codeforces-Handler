@@ -4,6 +4,15 @@
   margin: 0;
 }
 
+.header {
+  padding: 3%;
+  text-align: center;
+  background-color: whitesmoke;
+  color: blue;
+  font-size: large;
+  font-family: "Times New Roman", Times, serif;
+}
+
 p{
   font-size: medium;
 }
