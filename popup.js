@@ -14,8 +14,27 @@ let recentContestLink = document.getElementById("recentContestLink");
 let handle_selected = document.getElementById("handle_selected");
 let handle_options = document.getElementById("handle_options");
 let show_handle = document.getElementById("show_handle");
-let handle="HighVoltage";
+let handle="NamanGoyal07";
 show_handle.innerHTML = "Handle selected: <b>" + handle + "</b>";
+
+// Remove this if CORS error not solved
+document.addEventListener("DOMContentLoaded",function() {
+    var cors_api_host = 'cors-anywhere.herokuapp.com';
+    var cors_api_url = 'https://' + cors_api_host + '/';
+    var slice = [].slice;
+    var origin = window.location.protocol + '//' + window.location.host;
+    var open = XMLHttpRequest.prototype.open;
+    XMLHttpRequest.prototype.open = function() {
+        var args = slice.call(arguments);
+        var targetOrigin = /^https?:\/\/([^\/]+)/i.exec(args[1]);
+        if (targetOrigin && targetOrigin[0].toLowerCase() !== origin &&
+            targetOrigin[1] !== cors_api_host) {
+            args[1] = cors_api_url + args[1];
+        }
+        return open.apply(this, args);
+    };
+});
+// upto this part
 
 chrome.storage.sync.get(
     ["darkMode"],
@@ -105,7 +124,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     let hrs = parseInt(mins / 60);
     let days = parseInt(hrs / 24);
     // hrs = hrs + 24*days;
-    time_left.innerHTML ="<p>" + (days) + " days, " + (hrs) + " hours, " + (mins % 60) + " minutes left"+"</p>";
+    if(days!=0) time_left.innerHTML ="<p>" + (days) + " days, " + (hrs) + " hours, " + (mins % 60) + " minutes left"+"</p>";
+    else time_left.innerHTML ="<p>" + (hrs) + " hours, " + (mins % 60) + " minutes left"+"</p>";
 });
 
 async function getTarget(){

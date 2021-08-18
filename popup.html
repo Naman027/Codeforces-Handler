@@ -38,9 +38,7 @@
         <progress id="bar" max="100"></progress>
         <h3 id="num_solved"></h3>
     </div>
-    <!-- <script src=//ajax.googleapis.com/ajax/libs/jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script> -->
     <script src="jquery-3.6.0.min.js"></script>
-    <!-- <input type="button" id='recommendations' name="scriptbutton" value=" Run Script "> -->
     <div class="color1">
         <h3>Last few Wrong Verdict Submissions:</h3>
         <div id="WA_probs"></div>
@@ -49,9 +47,11 @@
         <h3>Recommended Problems</h3>
         <label for="diff">Choose the difficulty:</label>
         <select id="diff" name="levels">
+            <option value="Warmup">Warmup</option>
             <option value="Easy">Easy</option>
             <option value="Medium">Medium</option>
             <option value="Hard">Hard</option>
+            <option value="Daily_Practice">Daily_Practice</option>
             <option value="Weak_Topics">Weak topics</option>
         </select>
         <input type="submit" id="diff_selected" value="Submit">
