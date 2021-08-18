@@ -2,6 +2,8 @@ let time_left = document.getElementById("time_left");
 let num_ac = document.getElementById("num_solved");
 let label_for_bar = document.getElementById("label");
 let bar = document.getElementById("bar");
+let goal = document.getElementById("goal");
+let goal_selected = document.getElementById("goal_selected");
 let target = 5;
 const body = document.querySelector(".container");
 let prob_links = document.getElementById("WA_probs");
@@ -53,6 +55,11 @@ handle_selected.addEventListener("click", () => {
     handle = handle_options.value;
     show_handle.innerHTML = "Handle selected: <b>" + handle + "</b>";
 });
+
+goal_selected.addEventListener("click", () => {
+    target = goal.value;
+});
+
 
 button.addEventListener("click", async() => {
     let url = "https://cors-anywhere.herokuapp.com/https://recommender.codedrills.io/profile?handles="+handle;
@@ -187,6 +194,7 @@ document.addEventListener("DOMContentLoaded", getTarget);
 document.addEventListener("DOMContentLoaded", getWAprobs);
 handle_selected.addEventListener("click", getTarget);
 handle_selected.addEventListener("click", getWAprobs);
+goal_selected.addEventListener("click", getTarget);
 
 const changeTheme = (e) => {
     chrome.storage.sync.get(["darkMode"], function (items) {
