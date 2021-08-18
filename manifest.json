@@ -17,6 +17,12 @@
   },
   "permissions": [
     "storage"
-  ]
+  ],
+  "icons": {
+    "16": "/images/laptop16.png",
+    "32": "/images/laptop32.png",
+    "48": "/images/laptop48.png",
+    "128": "/images/laptop128.png"
+  }
 }
 
