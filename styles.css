@@ -1,5 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap");
 
+* {
+  margin: 0;
+}
+
 .dark-mode {
   background: #333;
   color: #fff !important;
@@ -26,4 +30,44 @@
 
 .dark-mode {
   color: #fafafa;
+}
+
+body {
+  background-color: whitesmoke;
+}
+
+.color2 {
+  margin-left: 0;
+  margin-right: 0;
+  padding-left: 3%;
+  padding-right: 3%;
+  padding-top: 3%;
+  padding-bottom: 3%;
+  background-color: lightblue;
+}
+
+.color1 {
+  margin-left: 0;
+  margin-right: 0;
+  padding-left: 3%;
+  padding-right: 3%;
+  padding-top: 3%;
+  padding-bottom: 3%;
+  background-color: whitesmoke;
+}
+
+a:link {
+  color: blue;
+}
+
+a:visited {
+  color: purple;
+}
+
+a:hover {
+  color: hotpink;
+}
+
+a:active {
+  color: red;
 }

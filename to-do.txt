@@ -1,5 +1,5 @@
-1. Frontend 
-2. Solving CORS Errors
-
-
+-> last 5 unsolved problems -- Done
+-> last 5 favourite questions -- Done
+-> Frontend
+-> Solving CORS error
 
