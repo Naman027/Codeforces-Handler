@@ -120,11 +120,10 @@ async function getTarget(){
     let percentage = (cnt * 100) / target;
     label_for_bar.innerText = "Today's Target Completion: " + percentage + "%";
     bar.value = percentage;
-    if (cnt == 0) num_ac.innerHTML = "You have done no questions yet... " + (target - cnt) + " to be done today!";
-    else if (cnt == 1) num_ac.innerHTML = "You have done only one question... " + (target - cnt) + " more to go!";
-    else if (cnt < target) num_ac.innerHTML = "You have done " + cnt + " questions... " + (target - cnt) + " more to go!";
+    if (cnt < target) num_ac.innerHTML = "You have done " + cnt + " questions... " + (target - cnt) + " more to go!";
     else num_ac.innerHTML = "Congrats! You have completed the target of " + target + " questions today.";
 }
+
 
 async function getWAprobs(){
     let api = await fetch("https://codeforces.com/api/user.status?handle=" + handle + "&from=1&count=50");
@@ -168,14 +167,9 @@ async function getWAprobs(){
 }
 
 document.addEventListener("DOMContentLoaded", getTarget);
-
 document.addEventListener("DOMContentLoaded", getWAprobs);
-
 handle_selected.addEventListener("click", getTarget);
-
 handle_selected.addEventListener("click", getWAprobs);
-
-
 
 const changeTheme = (e) => {
     chrome.storage.sync.get(["darkMode"], function (items) {
@@ -193,4 +187,3 @@ const changeTheme = (e) => {
 
 let darkControl = document.querySelector(".dark-control");
 darkControl.addEventListener("click", (e) => changeTheme(e));
-
