@@ -17,8 +17,6 @@ let show_handle = document.getElementById("show_handle");
 let handle="NamanGoyal07";
 show_handle.innerHTML = "Handle selected: <b>" + handle + "</b>";
 
-
-
 // Remove this if CORS error not solved
 document.addEventListener("DOMContentLoaded",function() {
     var cors_api_host = 'cors-anywhere.herokuapp.com';
@@ -125,7 +123,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     let mins = parseInt(seconds / 60);
     let hrs = parseInt(mins / 60);
     let days = parseInt(hrs / 24);
-    hrs = hrs - 24*days;
+    // hrs = hrs + 24*days;
     if(days!=0) time_left.innerHTML ="<p>" + (days) + " days, " + (hrs) + " hours, " + (mins % 60) + " minutes left"+"</p>";
     else time_left.innerHTML ="<p>" + (hrs) + " hours, " + (mins % 60) + " minutes left"+"</p>";
 });
