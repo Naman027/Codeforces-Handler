@@ -27,7 +27,7 @@
 ## Usage
 > Will be hosted shortly till then
 ```
-Clone the github and on chrome://extensions, upload the code as Load Unpacked.
+Clone this git repo and on chrome://extensions, upload the code files as Load Unpacked.
 ```
 
 Further Contributions/Suggestions are welcome.
