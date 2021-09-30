@@ -13,7 +13,7 @@
 
 ### Backend
 <li>JavaScript</li>
-<li>JQuery- JS library<li>
+<li>JQuery- JS library</li>
 
 ### Utilities
 <li>Web Scraping in NodeJs (XML Scripting)</li>
